@@ -2,10 +2,10 @@
 // HELP!!!!!!!!!!!!!!!
 
 import './css/styles.css';
-// import Notiflix from '../node_modules/notiflix';
+import Notiflix from 'notiflix';
 // import Notiflix from '../node_modules';
 import { fetchCountries } from './fetchCountries.js';
-// import throttle from 'lodash.debounce';
+import debounce from 'lodash.debounce';
 // import throttle from '../node_modules';
 // var debounce = require('lodash.debounce');
 
@@ -15,9 +15,9 @@ const searchForm = document.querySelector('#search-box');
 const countryList = document.querySelector('.country-list');
 const countryInfo = document.querySelector('.country-info');
 
-searchForm.addEventListener('input', onSearch);
+// searchForm.addEventListener('input', onSearch);
 
-// searchForm.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
+searchForm.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 
 // searchForm.addEventListener(
 //   'input',
@@ -42,9 +42,9 @@ function onSearch(evt) {
       console.log(response);
 
       if (response.length > 10) {
-        // Notiflix.Notify.info(
-        //   'Too many matches found. Please enter a more specific name.'
-        // );
+        Notiflix.Notify.info(
+          'Too many matches found. Please enter a more specific name.'
+        );
         console.log(
           'Too many matches found. Please enter a more specific name.'
         );
@@ -64,7 +64,7 @@ function onSearch(evt) {
     })
     .catch(() => {
       console.log('Oops, there is no country with that name');
-      // Notiflix.Notify.failure('Oops, there is no country with that name');
+      Notiflix.Notify.failure('Oops, there is no country with that name');
       return [];
     });
 }
