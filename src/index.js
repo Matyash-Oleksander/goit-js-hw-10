@@ -1,12 +1,9 @@
-// НЕ НАЛАШТОВУЄТЬСЯ ІМПРОРТ ФАЙЛІВ!!!!!!!!!!!!!!!!
-// HELP!!!!!!!!!!!!!!!
-
 import './css/styles.css';
 import Notiflix from 'notiflix';
-// import Notiflix from '../node_modules';
+
 import { fetchCountries } from './fetchCountries.js';
 import debounce from 'lodash.debounce';
-// import throttle from '../node_modules';
+
 // var debounce = require('lodash.debounce');
 
 const DEBOUNCE_DELAY = 300;
@@ -28,7 +25,7 @@ searchForm.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 
 function onSearch(evt) {
   evt.preventDefault();
-  console.log('START 1');
+  // console.log('START 1');
 
   const name = searchForm.value;
 
@@ -39,16 +36,16 @@ function onSearch(evt) {
     .then(response => {
       countryList.innerHTML = '';
       countryInfo.innerHTML = '';
-      console.log(response);
+      // console.log(response);
 
       if (response.length > 10) {
         Notiflix.Notify.info(
           'Too many matches found. Please enter a more specific name.'
         );
-        console.log(
-          'Too many matches found. Please enter a more specific name.'
-        );
-        console.log('START 2', response);
+        // console.log(
+        //   'Too many matches found. Please enter a more specific name.'
+        // );
+        // console.log('START 2', response);
       } else if (response.length < 10 && response.length >= 2) {
         countryList.insertAdjacentHTML(
           'beforeend',
@@ -59,26 +56,15 @@ function onSearch(evt) {
           'beforeend',
           renderCountryInfo(response)
         );
-        console.log('START 3', response);
+        // console.log('START 3', response);
       }
     })
     .catch(() => {
-      console.log('Oops, there is no country with that name');
+      // console.log('Oops, there is no country with that name');
       Notiflix.Notify.failure('Oops, there is no country with that name');
       return [];
     });
 }
-
-// function fetchCountries(name) {
-//   return fetch(
-//     `https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,flags,languages`
-//   ).then(response => {
-//     if (!response.ok) {
-//       throw new Error(response.status);
-//     }
-//     return response.json();
-//   });
-// }
 
 // function fetchCountries(name) {
 //   return fetch(
