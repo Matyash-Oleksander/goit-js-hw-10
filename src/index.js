@@ -6,7 +6,7 @@ import debounce from 'lodash.debounce';
 
 // var debounce = require('lodash.debounce');
 
-const DEBOUNCE_DELAY = 0;
+const DEBOUNCE_DELAY = 300;
 
 const searchForm = document.querySelector('#search-box');
 const countryList = document.querySelector('.country-list');
