@@ -6,12 +6,12 @@ import debounce from 'lodash.debounce';
 
 // var debounce = require('lodash.debounce');
 
-const DEBOUNCE_DELAY = 300;
+const DEBOUNCE_DELAY = 0;
 
 const searchForm = document.querySelector('#search-box');
 const countryList = document.querySelector('.country-list');
 const countryInfo = document.querySelector('.country-info');
-
+// let input = document.getElementById('#search-box');
 // searchForm.addEventListener('input', onSearch);
 
 searchForm.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
@@ -27,7 +27,8 @@ function onSearch(evt) {
   evt.preventDefault();
   // console.log('START 1');
 
-  const name = searchForm.value;
+  let name = searchForm.value.trim();
+  console.log(name);
 
   if (name === '') {
     return (countryList.innerHTML = ''), (countryInfo.innerHTML = '');
@@ -46,7 +47,7 @@ function onSearch(evt) {
         //   'Too many matches found. Please enter a more specific name.'
         // );
         // console.log('START 2', response);
-      } else if (response.length < 10 && response.length >= 2) {
+      } else if (response.length <= 10 && response.length >= 2) {
         countryList.insertAdjacentHTML(
           'beforeend',
           renderCountryList(response)
@@ -62,6 +63,8 @@ function onSearch(evt) {
     .catch(() => {
       // console.log('Oops, there is no country with that name');
       Notiflix.Notify.failure('Oops, there is no country with that name');
+      // myFunction();
+      // document.getElementById('search-box').reset();
       return [];
     });
 }
@@ -111,4 +114,27 @@ function renderCountryInfo(countries) {
         `;
     })
     .join('');
+}
+
+// очищення форми в разі catch
+
+function myFunction() {
+  //alert("ok");
+
+  console.log('ВИЗВАНА ФУНКЦІЯ!!!!!!!!!!!!!!!!!!!');
+  // countryList.innerHTML = '';
+  // document.getElementById('#search-box').reset();
+  // searchForm.value = '';
+  // HTMLFormElement.reset();
+  // var elem = document.getElementById('#search-box');
+  // // elem = '';
+  // const input = document.getElementById('#search-box');
+  // input.addEventListener('reset');
+  // document.getElementById('#search-box').value = '';
+
+  // const firstNameInput = document.getElementById('#search-box');
+
+  // return (firstNameInput.value = '');
+
+  // input.reset();
 }
